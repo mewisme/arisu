@@ -12,7 +12,7 @@ pub fn setup_animation(mut commands: Commands, asset_server: Res<AssetServer>) {
   commands.spawn(Camera2dBundle::default());
 
   let mut frames = Vec::new();
-  for i in 1..=640 {
+  for i in 1..=620 {
     let path = format!("embedded://frames/frame_{:04}.png", i);
     frames.push(asset_server.load::<Image>(path));
   }

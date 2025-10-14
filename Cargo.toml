@@ -1,6 +1,6 @@
 [package]
 name = "arisu"
-version = "0.0.2"
+version = "0.0.3"
 edition = "2021"
 build = "build.rs"
 authors = ["Mew <mauminh.nguyen@gmail.com>"]
