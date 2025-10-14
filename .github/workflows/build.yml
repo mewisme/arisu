@@ -100,9 +100,6 @@ jobs:
           # Copy binary with correct extension and location
           cp ${{ matrix.binary_path }} package/
 
-          # Copy documentation and examples
-          cp README.md LICENSE package/
-
       - name: Create ZIP archive
         shell: bash
         run: |
