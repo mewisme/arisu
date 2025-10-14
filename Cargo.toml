@@ -3,6 +3,11 @@ name = "arisu"
 version = "0.0.3"
 edition = "2021"
 build = "build.rs"
+authors = ["Mew <mauminh.nguyen@gmail.com>"]
+license = "MIT"
+repository = "https://github.com/mewisme/arisu"
+homepage = "https://github.com/mewisme/arisu"
+keywords = ["bevy", "desktop", "animation"]
 
 [[bin]]
 name = "Arisu"
