@@ -51,13 +51,18 @@
 
 ### Dùng Debug build
 
-1. Download artifact `Arisu-windows-x86_64-debug` từ GitHub Actions
-2. Chạy `Arisu.exe` từ Command Prompt:
+1. Download file `Arisu-debug.exe` từ GitHub Release
+2. Chạy `Arisu-debug.exe` (nó sẽ hiển thị console window)
+3. Hoặc chạy từ Command Prompt để xem đầy đủ logs:
    ```cmd
    cd path\to\arisu
-   Arisu.exe
+   Arisu-debug.exe
    ```
-3. Xem error messages trong console
+4. Xem error messages và logs trong console window
+
+**Khác biệt giữa Arisu.exe và Arisu-debug.exe:**
+- `Arisu.exe`: Release build, không có console, chạy ẩn
+- `Arisu-debug.exe`: Debug build, có console window, hiển thị logs và errors
 
 ### Check system requirements
 

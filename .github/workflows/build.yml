@@ -262,6 +262,20 @@ jobs:
       - name: Download all artifacts
         uses: actions/download-artifact@v4
 
+      - name: Prepare release files
+        run: |
+          # Rename debug executable
+          if [ -f "Arisu-windows-x86_64-debug/Arisu.exe" ]; then
+            mv Arisu-windows-x86_64-debug/Arisu.exe Arisu-windows-x86_64-debug/Arisu-debug.exe
+            echo "✅ Debug binary renamed to Arisu-debug.exe"
+          else
+            echo "⚠️ Debug binary not found"
+          fi
+
+          ls -la Arisu-windows-x86_64/
+          ls -la Arisu-windows-x86_64-debug/ || true
+        shell: bash
+
       - name: Create release package
         run: |
           mkdir -p release-package
@@ -304,7 +318,7 @@ jobs:
           - See TROUBLESHOOTING.md for detailed solutions
           - Check Windows Defender/Antivirus
           - Try running as administrator
-          - Download debug version for error messages
+          - Use Arisu-debug.exe to see error messages
 
           More info: https://github.com/mewisme/arisu
           EOF
@@ -322,8 +336,8 @@ jobs:
 
           ## 📦 Files Included
 
-          - **Arisu.exe** - Main executable (release build)
-          - **Arisu.exe-debug** - Debug executable (for troubleshooting)
+          - **Arisu.exe** - Main executable (release build, optimized)
+          - **Arisu-debug.exe** - Debug executable (shows console, for troubleshooting)
           - **arisu.config.example.json** - Example configuration file
           - **README.md** - Full documentation
           - **CUSTOM_FRAMES.md** - Guide for custom animations
@@ -344,7 +358,7 @@ jobs:
           2. Right-click → Properties → Unblock
           3. Try running as administrator
           4. See **TROUBLESHOOTING.md** for detailed fixes
-          5. Download the `Arisu.exe-debug` artifact for error messages
+          5. Download **Arisu-debug.exe** to see error messages in console
 
           **Requirements:**
           - Windows 10/11 (64-bit)
@@ -373,7 +387,7 @@ jobs:
         with:
           files: |
             Arisu-windows-x86_64/Arisu.exe
-            Arisu-windows-x86_64-debug/Arisu.exe
+            Arisu-windows-x86_64-debug/Arisu-debug.exe
             release-package/arisu.config.example.json
             release-package/README.md
             release-package/CUSTOM_FRAMES.md
