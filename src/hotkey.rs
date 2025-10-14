@@ -10,7 +10,6 @@ pub fn spawn_hotkey(tx: Sender<TrayCmd>) {
   std::thread::spawn(move || {
     let manager = GlobalHotKeyManager::new().expect("Failed to create hotkey manager");
 
-    // Register các hotkeys trực tiếp
     let pause_hotkey = HotKey::new(Some(Modifiers::ALT), Code::KeyP);
     let hide_hotkey = HotKey::new(Some(Modifiers::ALT), Code::KeyH);
     let lock_hotkey = HotKey::new(Some(Modifiers::ALT), Code::KeyL);
@@ -31,7 +30,7 @@ pub fn spawn_hotkey(tx: Sender<TrayCmd>) {
 
     let receiver = GlobalHotKeyEvent::receiver();
 
-    println!("🎹 Hotkey active!");
+    println!("   Hotkey active!");
     println!("   Alt+P: Toggle Pause/Resume");
     println!("   Alt+H: Toggle Hide/Visible");
     println!("   Alt+L: Toggle Lock/Unlock");
@@ -40,16 +39,16 @@ pub fn spawn_hotkey(tx: Sender<TrayCmd>) {
     loop {
       if let Ok(event) = receiver.recv() {
         let cmd = if event.id == pause_hotkey.id() {
-          println!("▶️  Pause/Resume toggled");
+          println!("Pause/Resume toggled");
           Some(TrayCmd::TogglePause)
         } else if event.id == hide_hotkey.id() {
-          println!("👁️  Hide/Visible toggled");
+          println!("Hide/Visible toggled");
           Some(TrayCmd::ToggleHide)
         } else if event.id == lock_hotkey.id() {
-          println!("🔒 Lock/Unlock toggled");
+          println!("Lock/Unlock toggled");
           Some(TrayCmd::ToggleLock)
         } else if event.id == quit_hotkey.id() {
-          println!("❌ Quit");
+          println!("Quit");
           Some(TrayCmd::Quit)
         } else {
           None

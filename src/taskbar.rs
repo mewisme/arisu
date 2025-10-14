@@ -12,9 +12,9 @@ use windows::{
 
 #[derive(Clone, Copy, Debug)]
 pub struct TaskbarInfo {
-  pub rect: (i32, i32, i32, i32), // (left, top, right, bottom)
+  pub rect: (i32, i32, i32, i32),
   pub edge: TaskbarEdge,
-  pub size: (i32, i32), // (w, h)
+  pub size: (i32, i32),
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum TaskbarEdge {
@@ -33,7 +33,6 @@ fn wide(s: &str) -> Vec<u16> {
     .collect()
 }
 
-/// Lấy thông tin taskbar chính (primary)
 #[cfg(target_os = "windows")]
 pub fn get_taskbar_info() -> Option<TaskbarInfo> {
   unsafe {
@@ -47,7 +46,6 @@ pub fn get_taskbar_info() -> Option<TaskbarInfo> {
     abd.hWnd = hwnd;
     let ok = SHAppBarMessage(ABM_GETTASKBARPOS, &mut abd);
     if ok == 0 {
-      // fallback
       let mut rc = RECT::default();
       if GetWindowRect(hwnd, &mut rc).is_ok() {
         let w = rc.right - rc.left;
@@ -83,7 +81,6 @@ pub fn get_taskbar_info() -> Option<TaskbarInfo> {
   }
 }
 
-/// Tính toạ độ neo (góc trái trên của cửa sổ) “ngay sát taskbar”
 #[cfg(target_os = "windows")]
 pub fn calc_anchor_on_taskbar(
   info: TaskbarInfo,
@@ -97,16 +94,16 @@ pub fn calc_anchor_on_taskbar(
 
   match info.edge {
     TaskbarEdge::Bottom => {
-      let y = tb_t - wh - margin; // ngay trên taskbar
+      let y = tb_t - wh - margin;
       let x = match align {
         "start" => tb_l + margin,
         "end" => tb_r - ww - margin,
-        _ => tb_l + (tb_w - ww) / 2, // center
+        _ => tb_l + (tb_w - ww) / 2,
       };
       (x, y)
     }
     TaskbarEdge::Top => {
-      let y = tb_b + margin; // ngay dưới taskbar
+      let y = tb_b + margin;
       let x = match align {
         "start" => tb_l + margin,
         "end" => tb_r - ww - margin,
@@ -115,12 +112,12 @@ pub fn calc_anchor_on_taskbar(
       (x, y)
     }
     TaskbarEdge::Left => {
-      let x = tb_r + margin; // bên phải taskbar
+      let x = tb_r + margin;
       let y = tb_t + (tb_h - wh) / 2;
       (x, y)
     }
     TaskbarEdge::Right => {
-      let x = tb_l - ww - margin; // bên trái taskbar
+      let x = tb_l - ww - margin;
       let y = tb_t + (tb_h - wh) / 2;
       (x, y)
     }

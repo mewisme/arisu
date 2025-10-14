@@ -9,7 +9,7 @@ pub struct AnimControl {
   pub locked: bool,
   pub dragging: bool,
   pub last_cursor: Option<Vec2>,
-  pub window_pos: IVec2, // lưu vị trí trong phiên
+  pub window_pos: IVec2,
   pub follow_taskbar: bool,
 }
 
@@ -67,11 +67,9 @@ pub fn pump_tray_commands(
   }
 }
 
-// Giữ AlwaysOnTop phòng khi WM thay đổi sau hide/show
 pub fn keep_always_on_top(mut q_win: Query<&mut Window, With<PrimaryWindow>>) {
   if let Ok(mut w) = q_win.get_single_mut() {
     w.window_level = WindowLevel::AlwaysOnTop;
-    // (tuỳ chọn) đảm bảo vị trí giữ nguyên:
     if let WindowPosition::At(pos) = w.position {
       w.position = WindowPosition::At(pos);
     }

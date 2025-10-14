@@ -11,7 +11,6 @@ pub struct FrameAnimation {
 pub fn setup_animation(mut commands: Commands, asset_server: Res<AssetServer>) {
   commands.spawn(Camera2dBundle::default());
 
-  // Nạp frame PNG từ embedded assets
   let mut frames = Vec::new();
   for i in 1..=640 {
     let path = format!("embedded://frames/frame_{:04}.png", i);
@@ -31,7 +30,7 @@ pub fn setup_animation(mut commands: Commands, asset_server: Res<AssetServer>) {
     FrameAnimation {
       frames,
       current: 0,
-      timer: Timer::new(Duration::from_millis(100), TimerMode::Repeating), // 10 FPS
+      timer: Timer::new(Duration::from_millis(200), TimerMode::Repeating), // 5 FPS
     },
   ));
 }
