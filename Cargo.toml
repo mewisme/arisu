@@ -44,6 +44,6 @@ lto = "off"
 
 [profile.release]
 opt-level = 2
-lto = true
+lto = "off"
 codegen-units = 256
 debug = 0
