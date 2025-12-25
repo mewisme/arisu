@@ -7,7 +7,8 @@ authors = ["Mew <mauminh.nguyen@gmail.com>"]
 license = "MIT"
 repository = "https://github.com/mewisme/spray"
 homepage = "https://github.com/mewisme/spray"
-keywords = ["bevy", "desktop", "animation"]
+description = "A lightweight desktop pet application with smooth GIF animations and full customization support"
+keywords = ["bevy", "desktop", "animation", "pet", "gif", "desktop-pet"]
 
 [[bin]]
 name = "Spray"

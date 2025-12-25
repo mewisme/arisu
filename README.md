@@ -1,37 +1,60 @@
 # Spray
 
-A cute desktop pet animation powered by Bevy, featuring smooth frame-based animations that runs on your desktop.
+A lightweight desktop pet application with smooth GIF animations. Features an embedded default animation that works immediately, plus full customization support for your own GIF files or PNG frame sequences.
 
 ## Features
 
-- 🎬 Smooth frame-based animation
-- 🖱️ Draggable window - click and drag to move anywhere on screen
-- 📌 Auto snap to taskbar on startup
-- 🪟 Always on top, transparent window
-- 💾 Embedded assets - default GIF animation bundled in the executable
-- 🎨 **Customizable frames, GIF, FPS, and scale** - use your own animations!
-- 🔄 **Hot reload config** - changes apply instantly without restart!
-- 🎯 **Scale control** - adjust animation size with `scale_percent` config
+- 🎬 **Smooth animations** - Supports GIF and PNG frame sequences
+- 💾 **Embedded default** - Works out of the box with embedded `evernight.gif` animation
+- 🎨 **Fully customizable** - Use your own GIF files or PNG frames
+- 🎯 **Scale control** - Adjust animation size with `scale_percent` config (default: 40%)
+- 🔄 **Hot reload** - Config changes apply instantly without restart
+- 🖱️ **Draggable window** - Click and drag to move anywhere on screen
+- 📌 **Auto snap to taskbar** - Automatically positions above taskbar on startup
+- 🪟 **Always on top** - Transparent window that stays visible
 
 ## Usage
 
-Simply run the executable. The animation will appear above your taskbar. Click and drag to move it to any position on your screen.
+Simply run the executable. The app will automatically load the embedded `evernight.gif` animation and appear above your taskbar. Click and drag to move it to any position on your screen.
+
+### Configuration
+
+On first run, `spray.config.json` will be auto-created with these defaults:
+
+```json
+{
+  "fps": 12,
+  "auto_startup": false,
+  "frame_digits": 4,
+  "frame_width": 200.0,
+  "frame_height": 250.0,
+  "window_title": "Spray",
+  "frame_folder": "frames",
+  "gif_path": "evernight.gif",
+  "mode": "auto",
+  "scale_percent": 40.0
+}
+```
 
 ### Customization
 
-You can customize the animation frames and FPS:
+You can customize the animation in several ways:
 
-1. **Custom GIF**: Place a GIF file in `assets/` folder (default: `evernight.gif`)
-2. **Custom Frames**: Create a folder `assets/frames/` and put PNG frames there (named `frame_0001.png`, `frame_0002.png`, etc.)
-3. **Custom FPS**: Edit `spray.config.json` (auto-created) to adjust the animation speed
-4. **Scale**: Adjust animation size with `scale_percent` (default: 40.0 = 40%)
+1. **Custom GIF**: Place a GIF file in `assets/` folder (e.g., `assets/my_animation.gif` and set `gif_path` in config)
+2. **Custom PNG Frames**: Create `assets/frames/` folder with PNG frames (`frame_0001.png`, `frame_0002.png`, etc.)
+3. **Adjust FPS**: Change `fps` value in config (default: 12)
+4. **Adjust Scale**: Change `scale_percent` value (default: 40.0 = 40% of original size)
+5. **Window Size**: Adjust `frame_width` and `frame_height` (default: 200x250)
+
+**Animation Loading Priority:**
+1. External GIF from `assets/{gif_path}` (if exists)
+2. External PNG frames from `assets/{frame_folder}/` (if exists)
+3. Embedded GIF (`evernight.gif`) - **default, always available**
+4. Embedded PNG frames (fallback)
+
+All config changes apply instantly via hot reload - no restart needed!
 
 See [CUSTOM_FRAMES.md](CUSTOM_FRAMES.md) for detailed instructions.
-
-**Default behavior:**
-- Priority order: External GIF → External Frames → Embedded GIF (evernight.gif) → Embedded frames
-- Default: Embedded GIF (evernight.gif) with config: fps=12, size=200x250, scale=40%
-- All settings (FPS, window size, scale) are configurable via `spray.config.json`
 
 ## Installation
 
@@ -53,8 +76,13 @@ Download the latest `Spray.exe` from [Releases](https://github.com/mewisme/spray
 
 ## Requirements
 
-- Windows 10/11 (tested)
-- Display with taskbar support for auto-snap feature
+- **OS**: Windows 10/11 (64-bit)
+- **GPU**: DirectX 11 compatible
+- **RAM**: 100MB minimum (200MB recommended)
+- **Disk**: 100MB for executable
+- **Display**: Taskbar support for auto-snap feature (optional)
+
+No additional runtime or dependencies needed - everything is bundled in the executable!
 
 ## Project Structure
 
@@ -89,6 +117,7 @@ spray/
 - [Bevy](https://bevyengine.org/) - Game engine for rendering
 - [bevy_embedded_assets](https://github.com/vleue/bevy_embedded_assets) - Asset embedding
 - [Windows API](https://github.com/microsoft/windows-rs) - Windows integration
+- [image](https://github.com/image-rs/image) - GIF decoding and image processing
 
 ## License
 
