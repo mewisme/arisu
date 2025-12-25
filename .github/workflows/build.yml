@@ -292,7 +292,10 @@ jobs:
             "frame_digits": 4,
             "frame_width": 128.0,
             "frame_height": 128.0,
-            "window_title": "Arisu"
+            "window_title": "Arisu",
+            "frame_folder": "frames",
+            "gif_path": null,
+            "mode": "auto"
           }
           EOF
 

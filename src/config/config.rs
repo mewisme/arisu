@@ -11,6 +11,20 @@ pub struct ArisuConfig {
   pub frame_width: f32,
   pub frame_height: f32,
   pub window_title: String,
+  #[serde(default = "default_frame_folder")]
+  pub frame_folder: String,
+  #[serde(default)]
+  pub gif_path: Option<String>,
+  #[serde(default = "default_mode")]
+  pub mode: String,
+}
+
+fn default_frame_folder() -> String {
+  "frames".to_string()
+}
+
+fn default_mode() -> String {
+  "auto".to_string()
 }
 
 impl Default for ArisuConfig {
@@ -22,6 +36,9 @@ impl Default for ArisuConfig {
       frame_width: 128.0,
       frame_height: 128.0,
       window_title: "Arisu".to_string(),
+      frame_folder: "frames".to_string(),
+      gif_path: None,
+      mode: "auto".to_string(),
     }
   }
 }
